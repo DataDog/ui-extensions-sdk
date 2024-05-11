@@ -693,7 +693,7 @@ const client = init({
 });
 ```
 
-On app load, the Developer Platform will detect the user's auth status based on the logic you define in `authStateCallback` and only render your app if users are authenticated. When users are not authenticated, they will be able to login by clicking the `Authenticate` button. Under the hood, the SDK will open a new tab for you at the provided url.
+On app load, the Developer Platform will detect the user's auth status based on the logic you define in `authStateCallback` and only render your app if users are authenticated. When users are not authenticated, they will be able to login by clicking the `Connect` button. Under the hood, the SDK will open a modal at the provided url.
 
 By default, we will poll your `authStateCallback` until it either returns `true` or the process times out. This requires no additional effort on your part as a developer if you have an existing authentication flow, however it may result in a short delay between the time the user successfully logs in and when the tab closes.
 
@@ -758,26 +758,9 @@ Your auth state is now available globally available in your app frames. You can 
 The Auth Provider is defined with the following properties:
 
 - `url`: (required) The url of your existing login page. This can be an absolute url like `https://domain.com/login` or a relative path to your app like `login`.
-- 'authStateCallback': (required) a callback function indicating whether or not the user is authenticated. It can be async for making API calls or sync for simple checks like reading a value from `localStorage` or a cookie. For convenience, the return value can also be a simple boolean
-
-```
-authStateCallback: () => {
-  return getCookieValue("auth_token");
-};
-
-```
-
-```
-authStateCallback: () => {
-  return localStorage.getItem("auth_token");
-};
-
-```
-
+- `authStateCallback`: (required) a callback function indicating whether or not the user is authenticated. It can be synchronous (i.e. reading data from a cookie) or asynchronous (i.e. making API calls). For convenience, the return value can also be a simple boolean.
 - `totalTimeout`: the total period in milliseconds to initiate authentication while the popup is open before it times out. Default is `120000` (2 minutes).
-
 - `requestTimeout `: the time interval in milliseconds before the `authStateCallback()` times out. Default is `20000` (20 seconds).
-
 - `retryInterval`: the time interval in milliseconds to retry initiating authentication while the popup is open. Default is `5000` (5 seconds).
 
 # Shared Formats
