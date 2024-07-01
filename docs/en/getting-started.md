@@ -1,6 +1,5 @@
 ---
 title: Datadog UI Extensions
-kind: documentation
 further_reading:
   - link: "https://github.com/DataDog/apps/blob/master/docs/en/ui-extensions-design-guidelines.md"
     tag: "Github"
